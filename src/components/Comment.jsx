@@ -1,0 +1,34 @@
+import { ThumbsUp } from 'phosphor-react'
+import { Trash } from 'phosphor-react'
+import styles from './Comment.module.css'
+
+export function Comment() {
+    return (
+        <div className={styles.comment}>
+            <img src="https://github.com/Adria199.png" />
+
+            <div className={styles.commentBox}>
+                <div className={styles.commentContent}>
+                    <header>
+                        <div className={styles.authorAndTime}>
+                            <strong>Adrian Guilherme</strong>
+                            <time title="15 february 23:34h" dateTime="2023-02-15 23:34">About an hour ago</time>
+                        </div>
+                        <button title='Delete Commentary'>
+                            <Trash size={24} />
+                        </button>
+                    </header>
+
+                    <p>Very good, Congratulations!! 👏👏</p>
+                </div>
+
+                <footer>
+                    <button>
+                        <ThumbsUp />
+                        Applaud <span>20</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+    )
+}
