@@ -1,2 +1,2 @@
-# React-Training-Projects
-In this repository you can see the training projects i did while training React
+# Ignite-Feed Project
+In this project i created feed using react and some other libs like
