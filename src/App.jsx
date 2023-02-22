@@ -8,7 +8,7 @@ import styles from './App.module.css'
 
 const posts = [
   {
-    Id: 1,
+    id: 1,
     
     author: {
       avatarUrl : 'https://github.com/Adria199.png',
@@ -26,7 +26,7 @@ const posts = [
   },
 
   {
-    Id: 2,
+    id: 2,
     
     author: {
       avatarUrl : 'https://github.com/Adria199.png',
@@ -57,6 +57,7 @@ function App() {
           {posts.map(post => {
             return (
               <Post
+                 key={post.id}
                  author={post.author}
                  content={post.content}
                  publishedAt={post.publishedAt} 

@@ -8,9 +8,10 @@ import { useState } from 'react';
 
 export function Post({author, publishedAt, content}) {
    const [comments, setComments] = useState ([
-       1,
-       2,  
+      'Very good, Congratulations!! 👏👏'
    ])
+
+   const [newCommentText, SetNewCommentText] = useState('')
    
     const publishedDateFormatted = format(publishedAt, "LLLL d 'at' HH:mm")
 
@@ -21,7 +22,20 @@ export function Post({author, publishedAt, content}) {
     function handleCreateNewComment() {
        event.preventDefault()
 
-       setComments([...comments, comments.lenght + 1])
+       setComments([...comments, newCommentText])
+       SetNewCommentText('');
+    }
+
+    function handleTextAreaChange() {
+      SetNewCommentText(event.target.value);
+    }
+
+    function deleteComment(commentToDelete) {
+       const commentsWithoutDeletedOne = comments.filter(comment => {
+          return comment !== commentToDelete;
+       })
+
+       setComments(commentsWithoutDeletedOne);
     }
 
   return (
@@ -41,9 +55,9 @@ export function Post({author, publishedAt, content}) {
       <div className={styles.content}>
         {content.map(line => {
           if (line.type == 'paragraph') {
-            return <p>{line.content}</p>
+            return <p key={line.content}>{line.content}</p>
           } else if (line.type == 'link') {
-            return <p><a href="#">{line.content}</a></p>
+            return <p key={line.content}><a href="#">{line.content}</a></p>
           }
         })}
       </div>
@@ -51,8 +65,11 @@ export function Post({author, publishedAt, content}) {
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Leave a feedback</strong>
 
-        <textarea 
+        <textarea
+          name='comment'
           placeholder='Leave a comment'
+          value={newCommentText}
+          onChange={handleTextAreaChange}
         />
         
         <footer>
@@ -62,7 +79,13 @@ export function Post({author, publishedAt, content}) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment />
+          return ( 
+           <Comment 
+             key={comment} 
+             content={comment} 
+             onDeleteComment={deleteComment} 
+           />
+          )
         })}
       </div>
 
